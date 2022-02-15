@@ -12,12 +12,12 @@ public:
         parent = nullptr;
     }
 
-    Tree *searchNode(Tree *t, int key) {
+    Tree *searchNode(Tree *t, int data) {
         Tree *p = t;
         while (t != nullptr) {
             p = t;
             if (t->data == data) return t;
-            t = key > t->data ? t->right : t->left;
+            t = data > t->data ? t->right : t->left;
         }
         return p;
     }
@@ -30,9 +30,22 @@ public:
         return t;
     }
 
-    void insertNode (Tree *t, int data) {};
+    void insertNode (Tree *t, int data) {
+        Tree *parent = t;
+        while (t != NULL) {
+            parent = t;
+            if (t->data == data) return;
+            t = data > t->data ? t->right : t->left;
+        }
+        Tree *node = new Tree(data);
+        if (data < parent->data)
+            parent->left = node;
+        else
+            parent->right = node;
+    };
 };
 
 int main() {
+    Tree *root = new Tree(10);
     return 0;
 }
